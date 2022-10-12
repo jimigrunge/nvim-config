@@ -10,7 +10,13 @@ local actions = require "telescope.actions"
 
 telescope.setup {
   defaults = {
-
+    --[[ layout_strategy = "vertical", ]]
+    layout_strategy = "horizontal",
+    layout_config = {
+      width = 0.99,
+      height = 0.99
+      -- other layout configuration here
+    },
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },

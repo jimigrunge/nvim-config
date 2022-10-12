@@ -14,9 +14,14 @@
 
 ### Install
 
-Run the `nvim-install.sh` script.
+#### Home
+Run the `nvim-install.sh` script in the bin directory.
 This will install all dependencies, backup your existing configuration, and copy this configuration into place.
 
+#### Work
+
+The work dev VM uses automated puppet scripts to handle installs so we need to handle extra software manually.
+Copy `nivm` to `~/.config` directory. `cp nvim ~/.congig/nvim`
 
 #### Then
 

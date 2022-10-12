@@ -2,7 +2,7 @@ local options = {
   title = false,
   backup = false,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-  cmdheight = 1,                           -- more space in the neovim command line for displaying messages
+  cmdheight = 0,                           -- Space in the neovim command line
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   conceallevel = 0,                        -- so that `` is visible in markdown files
   fileencoding = "utf-8",                  -- the encoding written to a file
@@ -26,8 +26,9 @@ local options = {
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
   tabstop = 2,                             -- insert 2 spaces for a tab
   cursorline = true,                       -- highlight the current line
+  colorcolumn = '120',                     -- maximum code width indicator
   number = true,                           -- set numbered lines
-  relativenumber = false,                   -- set relative numbered lines
+  relativenumber = false,                  -- set relative numbered lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
@@ -57,32 +58,3 @@ vim.cmd [[
   hi LspDiagnosticsDefaultWarn  guifg=#ffff00 gui=nocombine
   hi LspDiagnosticsDefaultError guifg=#ff0000 gui=nocombine
 ]]
-
-
--- ------------------------------------
--- Co-Authors for git commit messages
---  - This is being replaced by abbrevman
---    I will be removing this block once
---    it is fully on my work machine
--- ------------------------------------
--- local ex = setmetatable({}, {
---   __index = function(t, k)
---     local command = k:gsub("_$", "!")
---     local f = function(...)
---       return vim.api.nvim_command(table.concat(vim.tbl_flatten { command, ... }, " "))
---     end
---     rawset(t, k, f)
---     return f
---   end,
--- })
--- ex.abbrev("cabjim", "co-authored-by: james grundner <james.grundner@ryansg.com>")
--- ex.abbrev("cabjf", "co-authored-by: joseph frazer <joseph.frazer@ryansg.com>")
--- ex.abbrev("cabmg", "co-authored-by: mark goldsmith <mark.goldsmith@ryansg.com>")
--- ex.abbrev("cabss", "co-authored-by: shelly shaver <shelly.shaver@ryansg.com>")
--- ex.abbrev("cabae", "co-authored-by: andrew elbaneh <andrew.elbaneh@ryansg.com>")
--- ex.abbrev("cabcv", "co-authored-by: corey vollmer <corey.vollmer@ryansg.com>")
--- ex.abbrev("cabrn", "co-authored-by: raymond nagel <raymond.nagel@ryansg.com>")
--- ex.abbrev("cabad", "co-authored-by: anthony dalfonso <anthony.dalfonso@ryansg.com>")
--- ex.abbrev("cabrh", "co-authored-by: ronnie herbine <veronica.herbine@ryansg.com>")
--- ex.abbrev("cabtq", "co-authored-by: thomas quiring <thomas.quiring@ryansg.com>")
--- ex.abbrev("cabme", "co-authored-by: matt edgar <matthew.edgar@rtspecialty.com>")

@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 toggleterm.setup({
-	size = 20,
+	size = 80,
 	open_mapping = [[<c-\>]],
 	hide_numbers = true,
 	shade_filetypes = {},
@@ -14,7 +14,8 @@ toggleterm.setup({
 	start_in_insert = true,
 	insert_mappings = true,
 	persist_size = true,
-	direction = "float",
+	--[[ direction = "float", ]]
+	direction = "horizontal",
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
@@ -40,37 +41,37 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, size = 80, direction = "horizontal" })
 
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
 
-local node = Terminal:new({ cmd = "node", hidden = true })
+local node = Terminal:new({ cmd = "node", hidden = true, size = 80, direction = "horizontal"  })
 
 function _NODE_TOGGLE()
 	node:toggle()
 end
 
-local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
+local ncdu = Terminal:new({ cmd = "ncdu", hidden = true, size = 80, direction = "horizontal"  })
 
 function _NCDU_TOGGLE()
 	ncdu:toggle()
 end
 
-local htop = Terminal:new({ cmd = "htop", hidden = true })
+local htop = Terminal:new({ cmd = "htop", hidden = true, size = 80, direction = "horizontal"  })
 
 function _HTOP_TOGGLE()
 	htop:toggle()
 end
 
-local bpytop = Terminal:new({ cmd = "bpytop", hidden = true })
+local bpytop = Terminal:new({ cmd = "bpytop", hidden = true, size = 80, direction = "horizontal"  })
 
 function _BPYTOP_TOGGLE()
 	bpytop:toggle()
 end
 
-local python = Terminal:new({ cmd = "python", hidden = true })
+local python = Terminal:new({ cmd = "python", hidden = true, size = 80, direction = "horizontal"  })
 
 function _PYTHON_TOGGLE()
 	python:toggle()

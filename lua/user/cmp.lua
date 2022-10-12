@@ -120,18 +120,16 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp", priority = 8,
+    { name = "nvim_lsp", group_index = 1, priority = 8,
       -- Coming pull request: https://github.com/hrsh7th/nvim-cmp/pull/1067
-      -- entry_filter = function(entry, ctx)
-      --   local kind = types.lsp.CompletionItemKind[entry:get_kind()]
-      --   if kind == "Text" then return false end
-      --   return true
-      -- end
+      entry_filter = function(entry, ctx)
+        return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+      end
     },
-    -- { name = "buffer" },
-    { name = "path" },
-    { name = "luasnip" },
-    { name = "nvim_lua" },
+    { name = "buffer", group_index = 2 },
+    { name = "path", group_index = 3 },
+    { name = "luasnip", group_index = 4 },
+    { name = "nvim_lua", group_index = 5 },
   },
   confirm_opts = {
     -- behavior = cmp.ConfirmBehavior.Replace,

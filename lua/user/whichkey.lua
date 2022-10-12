@@ -5,7 +5,7 @@ end
 
 local mappings = {
   [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
-  ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
+  ["/"] = { "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", "Comment" },
   ["?"] = { "<cmd>Cheatsheet<cr>", "Cheatsheet" },
   [">"] = { "<cmd>BufferLineMoveNext<CR>", "BufferMoveNext" },
   ["<lt>"] = { "<cmd>BufferLineMovePrev<CR>", "BufferMovePrevious" },
@@ -74,7 +74,8 @@ local mappings = {
     ["D"] = { "<cmd>lua require('neogen').generate()<cr>", "Annotations" },
     -- ["e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic" },
     ["e"] = { "<cmd>lua require('lsp_lines').toggle()<CR>", "Line diagnostic" },
-    ["f"] = { "<cmd>lua vim.lsp.buf.formatting_sync()<cr>", "Format" },
+    --[[ ["f"] = { "<cmd>lua vim.lsp.buf.formatting_sync()<cr>", "Format" }, ]]
+    ["f"] = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     ["i"] = { "<cmd>LspInfo<cr>", "Info" },
     ["I"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     ["j"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next Diagnostic" },
@@ -95,7 +96,10 @@ local mappings = {
     name = "Markdown",
     ["p"] = { "<cmd>Glow<cr>", "Markdown Preview" }
   },
-  -- ["n"] = {},
+  ["n"] = {
+    name = "Neogen",
+    ["f"] = { "<cmd>lua require('neogen').generate()<cr>", "Generate Comment"}
+  },
   ["o"] = {
     name = "Outline",
     ["t"] = { "<cmd>SymbolsOutline<CR>", "Toggle Outline" },
@@ -145,7 +149,7 @@ local mappings = {
     ["t"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
     ["p"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
     ["f"] = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-    ["h"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    ["h"] = { "<cmd>ToggleTerm size=80 direction=horizontal<cr>", "Horizontal" },
     ["v"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
   -- ["u"] = {},
@@ -189,7 +193,7 @@ local n_mappings = {
 }
 
 local v_mappings = {
-  ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+  ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
   ["f"] = { ":s/\\v%V//gc<Left><Left><Left><Left>", "Search Replace Visual" },
 }
 

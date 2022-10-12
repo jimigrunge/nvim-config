@@ -15,7 +15,10 @@ bufferline.setup {
     -- NOTE: this plugin is designed with this icon in mind,
     -- and so changing this is NOT recommended, this is intended
     -- as an escape hatch for people who cannot bear it for whatever reason
-    indicator_icon = "▎",
+    indicator = {
+      style = 'icon',
+      icon ="▎"
+    },
     buffer_close_icon = "",
     -- buffer_close_icon = '',
     modified_icon = "●",
@@ -47,140 +50,140 @@ bufferline.setup {
     enforce_regular_tabs = false,
     always_show_bufferline = true,
   },
-  highlights = {
-    fill = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-    background = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    buffer_selected = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultHint'},
-      -- guibg = {attribute='bg',highlight='#0000ff'},
-      guibg = { attribute = "bg", highlight = "TabLineSel" },
-      gui = 'bold'
-    },
-    buffer_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    diagnostic_selected = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultHint'},
-      guibg = {attribute='bg',highlight='#00ff00'},
-      gui = 'bold'
-    },
-    diagnostic_visible = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultHint'},
-      guibg = {attribute='bg',highlight='#00ff00'},
-    },
-
-    info_selected = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultInfo'},
-      guibg = {attribute='bg',highlight='#73D7FF'},
-      gui = 'bold'
-    },
-    info_visible = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultInfo'},
-      guibg = {attribute='bg',highlight='#73D7FF'},
-    },
-
-    warning_selected = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultWarn'},
-      guibg = {attribute='bg',highlight='#ffff00'},
-      gui = 'bold'
-    },
-    warning_visible = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultWarn'},
-      guibg = {attribute='bg',highlight='#ffff00'},
-    },
-
-    error_selected = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
-      guibg = {attribute='bg',highlight='#ff0000'},
-      gui = 'bold'
-    },
-    error_visible = {
-      guifg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
-      guibg = {attribute='bg',highlight='#ff0000'},
-    },
-
-    close_button = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-    close_button_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-    -- close_button_selected = {
-    --   guifg = {attribute='fg',highlight='TabLineSel'},
-    --   guibg ={attribute='bg',highlight='TabLineSel'}
-    --   },
-
-    tab_selected = {
-      guifg = { attribute = "fg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "Normal" },
-    },
-    tab = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-    tab_close = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    duplicate_selected = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-      gui = "italic",
-    },
-    duplicate_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-      gui = "italic",
-    },
-    duplicate = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-      gui = "italic",
-    },
-
-    modified = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-    modified_selected = {
-      guifg = { attribute = "fg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "Normal" },
-    },
-    modified_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-
-    separator = {
-      guifg = { attribute = "bg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-    separator_selected = {
-      guifg = { attribute = "bg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "Normal" },
-    },
-    separator_visible = {
-      guifg = {attribute='bg',highlight='TabLine'},
-      guibg = {attribute='bg',highlight='TabLine'}
-      },
-    indicator_selected = {
-      -- guifg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-      -- guifg = { attribute = "fg", highlight = "Normal" },
-      -- guibg = { attribute = "bg", highlight = "Normal" },
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-    },
-  },
+  --[[ highlights = { ]]
+  --[[   fill = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[   background = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   buffer_selected = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultHint'}, ]]
+  --[[     -- bg = {attribute='bg',highlight='#0000ff'}, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLineSel" }, ]]
+  --[[     bold = true ]]
+  --[[   }, ]]
+  --[[   buffer_visible = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   diagnostic_selected = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultHint'}, ]]
+  --[[     bg = {attribute='bg',highlight='#00ff00'}, ]]
+  --[[     bold = true ]]
+  --[[   }, ]]
+  --[[   diagnostic_visible = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultHint'}, ]]
+  --[[     bg = {attribute='bg',highlight='#00ff00'}, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   info_selected = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultInfo'}, ]]
+  --[[     bg = {attribute='bg',highlight='#73D7FF'}, ]]
+  --[[     bold = true ]]
+  --[[   }, ]]
+  --[[   info_visible = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultInfo'}, ]]
+  --[[     bg = {attribute='bg',highlight='#73D7FF'}, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   warning_selected = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultWarn'}, ]]
+  --[[     bg = {attribute='bg',highlight='#ffff00'}, ]]
+  --[[     bold = true ]]
+  --[[   }, ]]
+  --[[   warning_visible = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultWarn'}, ]]
+  --[[     bg = {attribute='bg',highlight='#ffff00'}, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   error_selected = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultError'}, ]]
+  --[[     bg = {attribute='bg',highlight='#ff0000'}, ]]
+  --[[     bold = true ]]
+  --[[   }, ]]
+  --[[   error_visible = { ]]
+  --[[     fg = {attribute='fg',highlight='LspDiagnosticsDefaultError'}, ]]
+  --[[     bg = {attribute='bg',highlight='#ff0000'}, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   close_button = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[   close_button_visible = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[   -- close_button_selected = { ]]
+  --[[   --   fg = {attribute='fg',highlight='TabLineSel'}, ]]
+  --[[   --   bg ={attribute='bg',highlight='TabLineSel'} ]]
+  --[[   --   }, ]]
+  --[[]]
+  --[[   tab_selected = { ]]
+  --[[     fg = { attribute = "fg", highlight = "Normal" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "Normal" }, ]]
+  --[[   }, ]]
+  --[[   tab = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[   tab_close = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   duplicate_selected = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[     italic = true ]]
+  --[[   }, ]]
+  --[[   duplicate_visible = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[     italic = true ]]
+  --[[   }, ]]
+  --[[   duplicate = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[     italic = true ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   modified = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[   modified_selected = { ]]
+  --[[     fg = { attribute = "fg", highlight = "Normal" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "Normal" }, ]]
+  --[[   }, ]]
+  --[[   modified_visible = { ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[]]
+  --[[   separator = { ]]
+  --[[     fg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[   separator_selected = { ]]
+  --[[     fg = { attribute = "bg", highlight = "Normal" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "Normal" }, ]]
+  --[[   }, ]]
+  --[[   separator_visible = { ]]
+  --[[     fg = {attribute='bg',highlight='TabLine'}, ]]
+  --[[     bg = {attribute='bg',highlight='TabLine'} ]]
+  --[[     }, ]]
+  --[[   indicator_selected = { ]]
+  --[[     -- fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" }, ]]
+  --[[     -- fg = { attribute = "fg", highlight = "Normal" }, ]]
+  --[[     -- bg = { attribute = "bg", highlight = "Normal" }, ]]
+  --[[     fg = { attribute = "fg", highlight = "TabLine" }, ]]
+  --[[     bg = { attribute = "bg", highlight = "TabLine" }, ]]
+  --[[   }, ]]
+  --[[ }, ]]
 }

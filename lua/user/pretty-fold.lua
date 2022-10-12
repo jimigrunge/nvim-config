@@ -23,9 +23,3 @@ prettyfold.setup {
     { '%[', ']' }, -- % to escape lua pattern char
   },
 }
-require('pretty-fold.preview').setup{
-   default_keybindings = true, -- Set to false to disable default keybindings
-
-   -- 'none', "single", "double", "rounded", "solid", 'shadow' or table
-   border = 'rounded' --{' ', '', ' ', ' ', ' ', ' ', ' ', ' '},
-}

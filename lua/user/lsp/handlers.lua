@@ -101,8 +101,14 @@ end
 
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
+    --[[ client.resolved_capabilities.document_formatting = false ]]
+    client.server_capabilities.documentFormattingProvider = false
   end
+
+  if client.name == "sumneko_lua" then
+    client.server_capabilities.documentFormattingProvider = false
+  end
+
   require('nvim-navic').attach(client, bufnr)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
@@ -113,8 +119,8 @@ M.on_attach = function(client, bufnr)
       require("jdtls").setup_dap { hotcodereplace = "auto" }
       require("jdtls.dap").setup_dap_main_class_configs()
     end
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.textDocument.completion.completionItem.snippetSupport = false
+    client.server_capabilities.documentFormattingProvider = false
+    --[[ client.resolved_capabilities.textDocument.completion.completionItem.snippetSupport = false ]]
   end
 end
 

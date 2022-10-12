@@ -34,19 +34,24 @@ vim.cmd [[
   augroup end
 
   " This will auto update all your plugins when saving the Packer plugin file"
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
+  " augroup packer_user_config
+  "   autocmd!
+  "   autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  " augroup end
+
+  " Uncomment this to format on save
+  " augroup _lsp_format
+  "   autocmd!
+  "   autocmd BufWritePre * lua vim.lsp.buf.formatting()
+  " augroup end
 
   augroup lightbulb_cmd
     autocmd CursorHold,CursorHoldI * lua require('nvim-lightbulb').update_lightbulb()
   augroup end
+
+  augroup _ts_preview_line
+    autocmd User TelescopePreviewerLoaded setlocal number
+  augroup end
 ]]
 
 vim.cmd([[hi FloatBorder guibg=NONE]])
--- Autoformat
--- augroup _lsp
---   autocmd!
---   autocmd BufWritePre * lua vim.lsp.buf.formatting()
--- augroup end

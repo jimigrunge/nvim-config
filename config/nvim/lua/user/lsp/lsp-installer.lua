@@ -3,6 +3,7 @@ if not status_ok then
 	return
 end
 
+-- -----------------------------------
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
@@ -21,16 +22,6 @@ lsp_installer.on_server_ready(function(server)
     local css_opts = require("user.lsp.settings.cssls")
     opts = vim.tbl_deep_extend("force", css_opts, opts)
   end
-
-  -- if server.name == 'diagnosticls' then
-  --   local diagnosticls_opts = require("user.lsp.settings.diagnosticls")
-  --   opts = vim.tbl_deep_extend("force", diagnosticls_opts, opts)
-  -- end
-
-  -- if server.name == 'efm' then
-  --   local efm_opts = require("user.lsp.settings.efm")
-  --   opts = vim.tbl_deep_extend("force", efm_opts, opts)
-  -- end
 
   if server.name == 'eslint' then
     local eslint_opts = require("user.lsp.settings.eslint")

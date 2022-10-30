@@ -2,14 +2,17 @@ local opts = { noremap = true, silent = true }
 
 local term_opts = { silent = true }
 
+-- -----------------------------------
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
+-- -----------------------------------
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- -----------------------------------
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -17,8 +20,11 @@ vim.g.maplocalleader = " "
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+-- -----------------------------------
 
+-- -----------------------------------
 -- Normal --
+-- -----------------------------------
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -72,13 +78,17 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 keymap("n", "<C-c><C-p>", "<cmd>PickColor<cr>", opts)
 
+-- -----------------------------------
 -- Insert --
+-- -----------------------------------
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "jj", "<ESC>", opts)
 keymap("i", "<C-c><C-p>", "<cmd>PickColorInsert<cr>", opts)
 
+-- -----------------------------------
 -- Visual --
+-- -----------------------------------
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
@@ -89,16 +99,19 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 
 -- Paste without copy
 keymap("v", "p", '"_dP', opts)
-keymap("v", "d", '"_d', opts)
 
+-- -----------------------------------
 -- Visual Block --
+-- -----------------------------------
 -- Move text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+-- -----------------------------------
 -- Terminal --
+-- -----------------------------------
 -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)

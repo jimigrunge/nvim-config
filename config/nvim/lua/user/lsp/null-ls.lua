@@ -3,15 +3,16 @@ if not null_ls_status_ok then
 	return
 end
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
   debug = false,
   sources = {
-    -- js jsx ts tsx html css json yaml markdown
+    -- -----------------
+    -- Formatting
+    -- -----------------
+    -- js/jsx/ts/tsx/json
     formatting.prettier,
     -- python
     formatting.black.with({ extra_args = { "--fast" } }),
@@ -23,26 +24,34 @@ null_ls.setup({
     formatting.shellharden,
     -- java
     formatting.google_java_format,
-    -- js jsx ts tsx html css json yaml markdown
-    -- diagnostics.eslint,
+    -- -----------------
+    -- Linting
+    -- -----------------
+    -- js/jsx/ts/tsx/json
+    diagnostics.eslint_d.with({
+      condition = function(utils)
+        return utils.root_has_file(".eslintrc.js")
+      end,
+    }),
     -- python
     -- diagnostics.flake8,
-    -- lua
-    diagnostics.luacheck,
+    -- lua - This is disabled in favor of the LSP linter
+    --       due to unrecognized global variable bug
+    -- diagnostics.luacheck,
     -- php
     diagnostics.phpcs.with({extra_args = { "--standard=PSR12", "-"}}),
     -- css
     diagnostics.stylelint,
     -- bash
     diagnostics.shellcheck,
-
-    -- null_ls.builtins.code_actions.eslint,
-    -- null_ls.builtins.code_actions.proselint,
-    -- null_ls.builtins.code_actions.refactoring,
-    -- null_ls.builtins.code_actions.shellcheck,
-
+    -- -----------------
+    -- Spelling
+    -- -----------------
     null_ls.builtins.hover.dictionary,
     null_ls.builtins.completion.spell,
+    -- -----------------
+    -- Git actions
+    -- -----------------
     null_ls.builtins.code_actions.gitsigns,
   },
 })

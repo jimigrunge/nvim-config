@@ -109,7 +109,7 @@ return packer.startup(function(use)
     requires = {
       "kyazdani42/nvim-web-devicons",
     },
-    tag = "nightly",
+    --[[ tag = "nightly", ]]
   }
 
   -- Tabs for buffers
@@ -170,7 +170,9 @@ return packer.startup(function(use)
   use { "arcticicestudio/nord-vim"
     ,commit = "0748955e9e8d9770b44f2bec8456189430b37d9d"
   }
-  use { "dracula/vim" }
+  use { "dracula/vim"
+    ,commit = "834f54c1e09a4ae7115f590ad26d470ccd67c3b4"
+  }
   use { "rmehri01/onenord.nvim"
     ,commit = "749ee2f7fdeb9a02f25195d4850d2ff16240c863"
   }
@@ -244,7 +246,9 @@ return packer.startup(function(use)
   use { "jose-elias-alvarez/null-ls.nvim",
     commit = "355f7012b4afd92c0387770f1bea892e74a91b2e"
   }
-  -- use("jayp0521/mason-null-ls.nvim")
+  use { "jayp0521/mason-null-ls.nvim"
+    , commit = "7a8411c99010314cc2aa23521aac4b3a657f137e"
+  }
   use { "RishabhRD/popfix",
     commit = "bf3cc436df63cd535350d5ef1b951c91554d4b01"
   }
@@ -305,7 +309,10 @@ return packer.startup(function(use)
   use { "junegunn/fzf",
     commit = "07da058eae6f26de4cbe08c48563154e775f6183"
   }
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope-fzf-native.nvim'
+    ,run = 'make'
+    ,commit = "65c0ee3d4bb9cb696e262bca1ea5e9af3938fc90"
+  }
   use { "nvim-telescope/telescope.nvim",
     commit = "0b1c41ad8052badca6e72eafa4bc5481152e483e",
     branch = '0.1.x',

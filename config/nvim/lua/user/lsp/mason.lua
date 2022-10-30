@@ -1,18 +1,18 @@
 local servers = {
 	"bashls",
 	"cssls",
-  --[[ "diagnosticls", ]]
-  --[[ "elm", ]]
-  "eslint",
+	--[[ "diagnosticls", ]]
+	--[[ "elm", ]]
+	"eslint",
 	"html",
-  "intelephense",
+	"intelephense",
 	"jsonls",
-  "lemminx",
+	"lemminx",
 	"pyright",
-  "solang",
+	"solang",
 	"sumneko_lua",
 	"tsserver",
-  "vimls",
+	"vimls",
 	"yamlls",
 }
 
@@ -20,9 +20,9 @@ local settings = {
 	ui = {
 		border = "none",
 		icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
 		},
 	},
 	log_level = vim.log.levels.INFO,

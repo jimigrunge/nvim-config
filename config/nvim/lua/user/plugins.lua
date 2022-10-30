@@ -70,9 +70,13 @@ return packer.startup(function(use)
   use { "windwp/nvim-ts-autotag"
     ,commit = "fdefe46c6807441460f11f11a167a2baf8e4534b"
   }
+
+  -- Amend keymap method calls
   use { "anuvyklack/nvim-keymap-amend"
     ,commit = "b8bf9d820878d5497fdd11d6de55dea82872d98e"
   }
+
+  -- Code folding
   use { "anuvyklack/fold-preview.nvim"
     ,commit = "0cabe8af16c73c2e0cbd9f99e0ec2b993457030c"
   }
@@ -90,7 +94,7 @@ return packer.startup(function(use)
     ,commit = "633068182cf894480341b992445f0f0d2883721d"
   }
 
-  -- File icon
+  -- File icons
   use { "kyazdani42/nvim-web-devicons"
     ,commit = "a8cf88cbdb5c58e2b658e179c4b2aa997479b3da"
   }
@@ -228,7 +232,6 @@ return packer.startup(function(use)
   use { "neovim/nvim-lspconfig",
     commit = "0a8064eda0c7a4475c4a8ceb39199e975308797b"
   }
-  --[[ use { "williamboman/nvim-lsp-installer" } ]]
   use { "williamboman/mason.nvim",
     commit = "d06095e26375fde04134adab2f2f5372e93d5dd8"
   }
@@ -241,6 +244,7 @@ return packer.startup(function(use)
   use { "jose-elias-alvarez/null-ls.nvim",
     commit = "355f7012b4afd92c0387770f1bea892e74a91b2e"
   }
+  -- use("jayp0521/mason-null-ls.nvim")
   use { "RishabhRD/popfix",
     commit = "bf3cc436df63cd535350d5ef1b951c91554d4b01"
   }
@@ -302,7 +306,6 @@ return packer.startup(function(use)
     commit = "07da058eae6f26de4cbe08c48563154e775f6183"
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  -- use { "nvim-telescope/telescope.nvim" }
   use { "nvim-telescope/telescope.nvim",
     commit = "0b1c41ad8052badca6e72eafa4bc5481152e483e",
     branch = '0.1.x',
@@ -390,6 +393,7 @@ return packer.startup(function(use)
     commit = "e7cb3e5f93b1fef6a713dbc182eff98badfc6dd4"
   }
 
+  -- Display processing progress
   use { "j-hui/fidget.nvim",
     commit = "1097a86db8ba38e390850dc4035a03ed234a4673"
   }

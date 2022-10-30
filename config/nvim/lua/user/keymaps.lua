@@ -40,6 +40,9 @@ keymap("n", "gt", ":BufferLinePick<CR>", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
+-- Delete character without copy
+keymap("n", "x", '"_x', opts)
+
 -- Upper/Lower case
 keymap("n", "+", "viwgU", opts)
 keymap("n", "-", "viwgu", opts)
@@ -83,7 +86,10 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+
+-- Paste without copy
 keymap("v", "p", '"_dP', opts)
+keymap("v", "d", '"_d', opts)
 
 -- Visual Block --
 -- Move text up and down

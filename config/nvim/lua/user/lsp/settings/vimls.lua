@@ -19,7 +19,8 @@ return {
     },
     vimruntime = ""
   },
-  root_dir = function(fname)
-    return vim.lsp.util.find_git_ancestor(fname) or vim.fn.getcwd()
+  root_dir = function()
+    return vim.fn.getcwd()
+    --[[ return vim.lsp.util.find_git_ancestor(fname) or vim.fn.getcwd() ]]
   end
 }

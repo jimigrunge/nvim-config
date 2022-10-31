@@ -3,6 +3,7 @@
 local servers = {
 	"bashls",       -- bash
 	"cssls",        -- css
+	"clangd",       -- cpp
 	"eslint",       -- js/ts
 	"html",         -- html
 	"intelephense", -- PHP
@@ -21,12 +22,14 @@ local servers = {
 local linter_formatters = {
   "prettier",           -- ts/js formatter
   "black",              -- python formatter
+  "clang-format",       -- cpp formatter
   "stylua",             -- lua formatter
   "phpcbf",             -- php formatting
   "shellharden",        -- bash formatting
   "google_java_format", -- java formatting
-  "eslint_d",           -- ts/js linter
-  "luacheck",           -- lua linter
+  "cpplint",            -- cpp linting
+  "eslint_d",           -- ts/js linting
+  "luacheck",           -- lua linting
   "phpcs",              -- php linting
   "stylelint",          -- css linting
   "shellcheck",         -- bash linting

@@ -23,6 +23,11 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", css_opts, opts)
   end
 
+  if server.name == 'clangd' then
+    local clangd_opts = require("user.lsp.settings.clangd")
+    opts = vim.tbl_deep_extend("force", clangd_opts, opts)
+  end
+
   if server.name == 'eslint' then
     local eslint_opts = require("user.lsp.settings.eslint")
     opts = vim.tbl_deep_extend("force", eslint_opts, opts)

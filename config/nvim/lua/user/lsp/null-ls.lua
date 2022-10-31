@@ -18,6 +18,8 @@ null_ls.setup({
     formatting.black.with({ extra_args = { "--fast" } }),
     -- lua
     formatting.stylua,
+    -- cpp
+    formatting.clang_format,
     -- php
     formatting.phpcbf.with({ extra_args = { "--standard=PSR12", "-"}}),
     --bash
@@ -40,6 +42,8 @@ null_ls.setup({
     -- diagnostics.luacheck,
     -- php
     diagnostics.phpcs.with({extra_args = { "--standard=PSR12", "-"}}),
+    -- cpp
+    diagnostics.cpplint,
     -- css
     diagnostics.stylelint,
     -- bash

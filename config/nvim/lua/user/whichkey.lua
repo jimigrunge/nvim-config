@@ -132,12 +132,17 @@ local mappings = {
     ["C"] = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },
     ["p"] = {
       name = "Picker",
-      ["a"] = { "<cmd>PickAltFont<cr>", "Alt Font Picker" },
-      ["e"] = { "<cmd>PickEmoji<cr>", "Emoji Picker" },
+      ["a"] = { "<cmd>IconPickerInsert alt_font<cr>", "Alt Font Picker" },
+      ["e"] = { "<cmd>IconPickerInsert emoji<cr>", "Emoji Picker" },
+      ["E"] = { "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", "Everything Picker" },
+      ["i"] = { "<cmd>IconPickerInsert nerd_font<cr>", "Icon Picker" },
+      ["s"] = { "<cmd>IconPickerInsert symbols<cr>", "Symbol Picker" },
+      --[[ ["a"] = { "<cmd>PickAltFont<cr>", "Alt Font Picker" }, ]]
+      --[[ ["e"] = { "<cmd>PickEmoji<cr>", "Emoji Picker" }, ]]
       --[[ ["E"] = { "<cmd>PickEverything<cr>", "Everything Picker" }, ]]
-      ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" },
-      ["n"] = { "<cmd>PickNerd<cr>", "Pick Nerd Icon" },
-      ["s"] = { "<cmd>PickSymbols<cr>", "Symbol Picker" },
+      --[[ ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" }, ]]
+      --[[ ["n"] = { "<cmd>PickNerd<cr>", "Pick Nerd Icon" }, ]]
+      --[[ ["s"] = { "<cmd>PickSymbols<cr>", "Symbol Picker" }, ]]
     }
   },
   ["t"] = {
@@ -198,15 +203,11 @@ local v_mappings = {
 }
 
 local i_mappings = {
-  ["p"] = {
-    name = "Picker",
-    ["a"] = { "<cmd>PickAltFont<cr>", "Alt Font Picker" },
-    ["e"] = { "<cmd>PickEmoji<cr>", "Emoji Picker" },
-    -- ["E"] = { "<cmd>PickEverything<cr>", "Everything Picker" },
-    ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" },
-    ["n"] = { "<cmd>PickNerd<cr>", "Nerd Font Icon" },
-    ["s"] = { "<cmd>PickSymbols<cr>", "Symbol Picker" },
-  }
+  ["a"] = { "<cmd>IconPickerInsert alt_font<cr>", "Alt Font Picker" },
+  ["e"] = { "<cmd>IconPickerInsert emoji<cr>", "Emoji Picker" },
+  ["E"] = { "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", "Everything Picker" },
+  ["i"] = { "<cmd>IconPickerInsert nerd_font<cr>", "Icon Picker" },
+  ["s"] = { "<cmd>IconPickerInsert symbols<cr>", "Symbol Picker" },
 }
 
 local setup = {
@@ -300,7 +301,7 @@ local vopts = {
 }
 local iopts = {
   mode = "i", -- VISUAL mode
-  prefix = "<Tab>",
+  prefix = "<C-i>",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps

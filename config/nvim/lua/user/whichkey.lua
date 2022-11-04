@@ -72,8 +72,8 @@ local mappings = {
     ["a"] = { "<cmd>CodeActionMenu<cr>", "Code Action" },
     ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
     ["D"] = { "<cmd>lua require('neogen').generate()<cr>", "Annotations" },
-    -- ["e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic" },
-    ["e"] = { "<cmd>lua require('lsp_lines').toggle()<CR>", "Line diagnostic" },
+    ["e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic hover" },
+    ["E"] = { "<cmd>lua require('lsp_lines').toggle()<CR>", "Line diagnostic" },
     ["f"] = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     ["i"] = { "<cmd>LspInfo<cr>", "Info" },
     ["I"] = { "<cmd>Mason<cr>", "Mason Installer" },
@@ -120,21 +120,21 @@ local mappings = {
   ["s"] = {
     name = "Search",
     ["/"] = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
-    ["b"] = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Checkout branch" },
+    --[[ ["b"] = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Checkout branch" }, ]]
     ["c"] = { "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "Colorscheme" },
     ["f"] = { "<cmd>lua require('telescope.builtin').fd()<cr>", "FD" },
-    ["h"] = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Find Help" },
-    ["M"] = { "<cmd>lua require('telescope.builtin').man_pages()<cr>", "Man Pages" },
+    --[[ ["h"] = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Find Help" }, ]]
+    --[[ ["M"] = { "<cmd>lua require('telescope.builtin').man_pages()<cr>", "Man Pages" }, ]]
     ["r"] = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Open Recent File" },
     ["s"] = { ":%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>", "Search Replace" },
-    ["R"] = { "<cmd>lua require('telescope.builtin').registers()<cr>", "Registers" },
+    --[[ ["R"] = { "<cmd>lua require('telescope.builtin').registers()<cr>", "Registers" }, ]]
     ["k"] = { "<cmd>lua require('telescope.builtin').keymaps()<cr>", "Keymaps" },
     ["C"] = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },
     ["p"] = {
       name = "Picker",
       ["a"] = { "<cmd>PickAltFont<cr>", "Alt Font Picker" },
-      ["e"] = { "<cmd>PickEmoji<cr>", "Icon Picker" },
-      ["E"] = { "<cmd>PickEverything<cr>", "Everything Picker" },
+      ["e"] = { "<cmd>PickEmoji<cr>", "Emoji Picker" },
+      --[[ ["E"] = { "<cmd>PickEverything<cr>", "Everything Picker" }, ]]
       ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" },
       ["n"] = { "<cmd>PickNerd<cr>", "Pick Nerd Icon" },
       ["s"] = { "<cmd>PickSymbols<cr>", "Symbol Picker" },
@@ -203,7 +203,7 @@ local i_mappings = {
     ["a"] = { "<cmd>PickAltFont<cr>", "Alt Font Picker" },
     ["e"] = { "<cmd>PickEmoji<cr>", "Emoji Picker" },
     -- ["E"] = { "<cmd>PickEverything<cr>", "Everything Picker" },
-    -- ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" },
+    ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" },
     ["n"] = { "<cmd>PickNerd<cr>", "Nerd Font Icon" },
     ["s"] = { "<cmd>PickSymbols<cr>", "Symbol Picker" },
   }
@@ -226,12 +226,12 @@ local setup = {
       windows = true, -- default bindings on <c-w>
       nav = true, -- misc bindings to work with windows
       z = true, -- bindings for folds, spelling and others prefixed with z
-      g = false, -- bindings for prefixed with g
+      g = true, -- bindings for prefixed with g
     },
   },
   -- add operators that will trigger motion and text object completion
   -- to enable all native operators, set the preset / operators plugin above
-  -- operators = { gc = "Comments" },
+  operators = { gc = "Comments" },
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
@@ -264,6 +264,7 @@ local setup = {
   ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
+  show_keys = true, -- show the currently pressed key and its label as a message in the command line
   triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
@@ -273,6 +274,12 @@ local setup = {
     i = { "j", "k" },
     v = { "j", "k" },
   },
+  -- disable the WhichKey popup for certain buf types and file types.
+  -- Disabled by deafult for Telescope
+  --[[ disable = { ]]
+  --[[   buftypes = {}, ]]
+  --[[   filetypes = { "TelescopePrompt" }, ]]
+  --[[ }, ]]
 }
 
 local opts = {
@@ -293,7 +300,7 @@ local vopts = {
 }
 local iopts = {
   mode = "i", -- VISUAL mode
-  prefix = "<leader>",
+  prefix = "<Tab>",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps

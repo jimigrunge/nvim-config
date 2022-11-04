@@ -63,6 +63,12 @@ return packer.startup(function(use)
     ,commit = "25c23219db8b2b932a595b4d2b661406ce4459fe"
   }
 
+  -- Navigation between vim and tmux
+  use {
+    "christoomey/vim-tmux-navigator"
+    ,commit = "bd4c38be5b4882991494cf77c0601a55bc45eebf"
+  }
+
   -- Autopairs, integrates with both cmp and treesitter
   use { "windwp/nvim-autopairs"
     ,commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347"
@@ -379,7 +385,9 @@ return packer.startup(function(use)
     "ziontee113/icon-picker.nvim",
     commit = "0f3b2648f6f8e788bc8dfe37bc9bb18b565cfc3c",
     config = function()
-      require("icon-picker")
+      require("icon-picker").setup({
+        disable_legacy_commands = true
+      })
     end,
   })
 
@@ -396,8 +404,8 @@ return packer.startup(function(use)
     end
   }
   -- Popup notifications
-  use { "rcarriga/nvim-notify",
-    commit = "e7cb3e5f93b1fef6a713dbc182eff98badfc6dd4"
+  use { "rcarriga/nvim-notify"
+    ,commit = "354e0ebb269d9e4feca073372431e8453f5f262a"
   }
 
   -- Display processing progress

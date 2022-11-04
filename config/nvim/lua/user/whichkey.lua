@@ -115,6 +115,7 @@ local mappings = {
   },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   -- ["r"] = {},
+  -- TODO: Some of the telescope builtins are not working properly
   ["s"] = {
     name = "Search",
     ["/"] = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
@@ -135,12 +136,6 @@ local mappings = {
       ["E"] = { "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", "Everything Picker" },
       ["i"] = { "<cmd>IconPickerInsert nerd_font<cr>", "Icon Picker" },
       ["s"] = { "<cmd>IconPickerInsert symbols<cr>", "Symbol Picker" },
-      --[[ ["a"] = { "<cmd>PickAltFont<cr>", "Alt Font Picker" }, ]]
-      --[[ ["e"] = { "<cmd>PickEmoji<cr>", "Emoji Picker" }, ]]
-      --[[ ["E"] = { "<cmd>PickEverything<cr>", "Everything Picker" }, ]]
-      --[[ ["i"] = { "<cmd>PickIcons<cr>", "Icon Picker" }, ]]
-      --[[ ["n"] = { "<cmd>PickNerd<cr>", "Pick Nerd Icon" }, ]]
-      --[[ ["s"] = { "<cmd>PickSymbols<cr>", "Symbol Picker" }, ]]
     }
   },
   ["t"] = {

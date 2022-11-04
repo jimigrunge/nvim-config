@@ -70,6 +70,7 @@ local mappings = {
   ["l"] = {
     name = "LSP",
     ["a"] = { "<cmd>CodeActionMenu<cr>", "Code Action" },
+    ["c"] = { "<cmd>lua require('neogen').generate()<cr>", "Generate DocBlock"},
     ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
     ["D"] = { "<cmd>lua require('neogen').generate()<cr>", "Annotations" },
     ["e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic hover" },
@@ -96,10 +97,7 @@ local mappings = {
     name = "Markdown",
     ["p"] = { "<cmd>Glow<cr>", "Markdown Preview" }
   },
-  ["n"] = {
-    name = "Neogen",
-    ["f"] = { "<cmd>lua require('neogen').generate()<cr>", "Generate Comment"}
-  },
+  --[[ ["n"] = {}, ]]
   ["o"] = {
     name = "Outline",
     ["t"] = { "<cmd>SymbolsOutline<CR>", "Toggle Outline" },
@@ -236,9 +234,10 @@ local setup = {
   key_labels = {
     -- override the label used to display some keys. It doesn't effect WK in any other way.
     -- For example:
-    -- ["<space>"] = "SPC",
-    -- ["<cr>"] = "RET",
-    -- ["<tab>"] = "TAB",
+    ["<space>"] = "SPC",
+    ["<cr>"] = "RET",
+    ["<tab>"] = "TAB",
+    ["<leader>"] = "LDR",
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo

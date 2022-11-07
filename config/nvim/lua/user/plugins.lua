@@ -326,6 +326,13 @@ return packer.startup(function(use)
   use { "nvim-telescope/telescope-media-files.nvim",
     commit = "513e4ee385edd72bf0b35a217b7e39f84b6fe93c"
   }
+  use {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  }
 
   -- Treesitter
   use {

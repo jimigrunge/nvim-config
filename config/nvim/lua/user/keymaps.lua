@@ -61,8 +61,8 @@ keymap("n", "<space><space>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "zf", "zf%", opts)
 
 -- Custom grepping
-keymap("n", ",/",  "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", opts)
-keymap("n", ",,/", "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", opts)
+--[[ keymap("n", ",/",  "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", opts) ]]
+--[[ keymap("n", ",,/", "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", opts) ]]
 keymap("n", "ff",  "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
 
 -- DAP
@@ -78,6 +78,8 @@ keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 keymap("n", "<C-c><C-p>", "<cmd>PickColor<cr>", opts)
+
+keymap("n", "<C-Bslash>", "<cmd>ToggleTerm<cr>", opts)
 
 -- -----------------------------------
 -- Insert --
@@ -118,4 +120,4 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-keymap("t", "<C-t>", ":ToggleTerm", term_opts)
+--[[ keymap("t", "<C-t>", ":ToggleTerm<cr>", term_opts) ]]

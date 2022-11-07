@@ -122,12 +122,14 @@ local mappings = {
     --[[ ["b"] = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Checkout branch" }, ]]
     ["c"] = { "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "Colorscheme" },
     ["f"] = { "<cmd>lua require('telescope.builtin').fd()<cr>", "FD" },
+    ["g"] = { "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", "Live Grep" },
     --[[ ["h"] = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Find Help" }, ]]
     --[[ ["M"] = { "<cmd>lua require('telescope.builtin').man_pages()<cr>", "Man Pages" }, ]]
     ["r"] = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Open Recent File" },
     ["s"] = { ":%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>", "Search Replace" },
     --[[ ["R"] = { "<cmd>lua require('telescope.builtin').registers()<cr>", "Registers" }, ]]
     ["k"] = { "<cmd>lua require('telescope.builtin').keymaps()<cr>", "Keymaps" },
+    ["wg"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", "Live Grep" },
     ["C"] = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },
     ["p"] = {
       name = "Picker",
@@ -168,6 +170,12 @@ local mappings = {
     R = { "<cmd>TroubleToggle lsp_references<CR>", "references" },
     w = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "workspace" },
     x = { "<cmd>TroubleToggle<CR>", "trouble" },
+    t = { name = "Todo",
+      l = { "<cmd>TodoLocList<cr>", "Local List" },
+      q = { "<cmd>TodoQuickFix<cr>", "QuickFix" },
+      t = { "<cmd>TodoTelescope<cr>", "Telescope" },
+      x = { "<cmd>TodoTrouble<cr>", "Trouble" },
+    },
   },
   -- ["y"] = {},
   -- ["z"] = {},

@@ -39,6 +39,13 @@ vim.cmd [[set statusline+=%f]]
 --[[ vim.opt.statusline:apend "%f" ]]
 
 -- ---------------------------------
+-- Whitespace settings
+-- ---------------------------------
+vim.g.strip_whitespace_on_save = 1
+vim.g.strip_whitespace_confirm = 1
+vim.g.strip_whitelines_at_eof  = 1
+
+-- ---------------------------------
 -- Diagnostic color highlighting
 -- ---------------------------------
 vim.api.nvim_command("highlight LspDiagnosticsUnderlineError gui=undercurl")
@@ -77,6 +84,14 @@ lvim.keys.normal_mode["<S-Tab>"] = ":BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["gt"] = ":BufferLinePick<CR>"
 lvim.keys.normal_mode["<A-j>"] = "<Esc>:m .+1<CR>==gi"
 lvim.keys.normal_mode["<A-k>"] = "<Esc>:m .-2<CR>==gi"
+-- Goto preview
+lvim.keys.normal_mode["gpd"] = "<cmd>lua require('goto-preview').goto_preview_definition()<CR>"
+lvim.keys.normal_mode["gpt"] = "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>"
+lvim.keys.normal_mode["gpi"] = "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>"
+lvim.keys.normal_mode["gP"]  = "<cmd>lua require('goto-preview').close_all_win()<CR>"
+lvim.keys.normal_mode["gpr"] = "<cmd>lua require('goto-preview').goto_preview_references()<CR>"
+-- Terminal
+lvim.keys.normal_mode["<C-Bslash>"] = ":ToggleTerm<cr>"
 
 -- Insert
 lvim.keys.insert_mode["jj"] = "<ESC>"
@@ -103,13 +118,10 @@ lvim.builtin.which_key.mappings["gl"] = { "<cmd>lua require'gitsigns'.blame_line
 lvim.builtin.which_key.mappings["le"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic hover" }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+  name = "Terminal",
+  f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+  h = { "<cmd>ToggleTerm size=80 direction=horizontal<cr>", "Horizontal" },
+  v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 }
 lvim.builtin.which_key.mappings["s/"] = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" }
 lvim.builtin.which_key.mappings["sg"] = { "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", "Live Grep" }
@@ -119,6 +131,22 @@ lvim.builtin.which_key.mappings["o"] = {
   ["t"] = { "<cmd>SymbolsOutline<CR>", "Toggle Outline" },
   ["o"] = { "<cmd>SymbolsOutlineOpen<CR>", "Open Outline" },
   ["c"] = { "<cmd>SymbolsOutlineClose<CR>", "Close Outline" }
+}
+lvim.builtin.which_key.mappings["x"] = {
+  name = "Diagnostics",
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Diagnostics" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "LocationList" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "QuickFix" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+  t = { name = "Todo",
+    l = { "<cmd>TodoLocList<cr>", "Local List" },
+    q = { "<cmd>TodoQuickFix<cr>", "QuickFix" },
+    t = { "<cmd>TodoTelescope<cr>", "Telescope" },
+    x = { "<cmd>TodoTrouble<cr>", "Trouble" },
+  },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+  x = { "<cmd>TroubleToggle<CR>", "trouble" },
 }
 
 -- ---------------------------------
@@ -284,6 +312,58 @@ lvim.plugins = {
     end
   },
   {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "romgrk/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup{
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          -- For all filetypes
+          -- Note that setting an entry here replaces all other patterns for this entry.
+          -- By setting the 'default' entry below, you can control which nodes you want to
+          -- appear in the context window.
+          default = {
+            'class',
+            'function',
+            'method',
+          },
+        },
+      }
+    end
+  },
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+    require('goto-preview').setup {
+          width = 120; -- Width of the floating window
+          height = 25; -- Height of the floating window
+          default_mappings = false; -- Bind default mappings
+          debug = false; -- Print debug information
+          opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
+          post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
+          -- You can use "default_mappings = true" setup option
+          -- Or explicitly set keybindings
+          -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+          -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+          -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+      }
+    end
+  },
+  {
     "npxbr/glow.nvim",
     ft = {"markdown"}
     -- run = "yay -S glow"
@@ -320,6 +400,11 @@ lvim.plugins = {
           })
       end,
   },
+  {
+    "felipec/vim-sanegx",
+    event = "BufRead",
+  },
+  { "ntpeters/vim-better-whitespace" }
 }
 
 -- ---------------------------------

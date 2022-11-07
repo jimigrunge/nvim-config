@@ -60,9 +60,24 @@ lvim.keys.normal_mode["<C-s>"] = "<cmd>w<cr>"
 lvim.keys.normal_mode["<S-l>"] = "<cmd>BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = "<cmd>BufferLineCyclePrev<CR>"
 lvim.keys.normal_mode["zf"] = "zf%"
-lvim.keys.normal_mode[",/"] = "<cmd>Telescope live_grep<cr>"
-lvim.keys.normal_mode[",,/"] = "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>"
 lvim.keys.normal_mode["ff"] = "<cmd>Telescope find_files<cr>"
+-- Better window navigation
+lvim.keys.normal_mode["<C-h>"] = "<C-w>h"
+lvim.keys.normal_mode["<C-j>"] = "<C-w>j"
+lvim.keys.normal_mode["<C-k>"] = "<C-w>k"
+lvim.keys.normal_mode["<C-l>"] = "<C-w>l"
+-- Resize with arrows
+lvim.keys.normal_mode["<C-Up>"] = ":resize -2<CR>"
+lvim.keys.normal_mode["<C-Down>"] = ":resize +2<CR>"
+lvim.keys.normal_mode["<C-Left>"] = ":vertical resize -2<CR>"
+lvim.keys.normal_mode["<C-Right>"] = ":vertical resize +2<CR>"
+-- Navigate buffers
+lvim.keys.normal_mode["<Tab>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-Tab>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["gt"] = ":BufferLinePick<CR>"
+lvim.keys.normal_mode["<A-j>"] = "<Esc>:m .+1<CR>==gi"
+lvim.keys.normal_mode["<A-k>"] = "<Esc>:m .-2<CR>==gi"
+
 -- Insert
 lvim.keys.insert_mode["jj"] = "<ESC>"
 -- Visual Block
@@ -85,6 +100,7 @@ lvim.builtin.which_key.mappings["gd"] = {
 }
 lvim.builtin.which_key.mappings["ge"] = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Toggle Blame" }
 lvim.builtin.which_key.mappings["gl"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<CR>", "Blame Line" }
+lvim.builtin.which_key.mappings["le"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic hover" }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -96,6 +112,8 @@ lvim.builtin.which_key.mappings["t"] = {
   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 lvim.builtin.which_key.mappings["s/"] = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" }
+lvim.builtin.which_key.mappings["sg"] = { "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", "Live Grep" }
+lvim.builtin.which_key.mappings["swg"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", "Live Grep" }
 lvim.builtin.which_key.mappings["o"] = {
   name = "Outline",
   ["t"] = { "<cmd>SymbolsOutline<CR>", "Toggle Outline" },
@@ -185,21 +203,20 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- -- make sure server will always be installed even if the server is in skipped_servers list
 lvim.lsp.installer.setup.ensure_installed = {
-  "bash-language-server",
-  "css-lsp",
-  "eslint-lsp",
-  "html-lsp",
+  "bashls",
+  "cssls",
+  "eslint",
+  "html",
   "intelephense",
-  "json-lsp",
+  "jsonls",
   "lemminx",
-  "lua-language-server",
   "pyright",
   "solang",
   "sumneko_lua",
-  "tailwindcss-language-server",
-  "typescript-language-server",
-  "vim-language-server",
-  "yaml-language-server",
+  "tailwindcss",
+  "tsserver",
+  "vimls",
+  "yamlls",
 }
 
 -- ---@usage disable automatic installation of servers

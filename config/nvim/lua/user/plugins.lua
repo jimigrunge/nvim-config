@@ -332,6 +332,7 @@ return packer.startup(function(use)
     config = function()
       require("todo-comments").setup()
     end,
+    commit = "530eb3a896e9eef270f00f4baafa102361afc93b"
   }
 
   -- Treesitter
@@ -432,9 +433,11 @@ return packer.startup(function(use)
   use { "rcarriga/nvim-dap-ui",
     commit = "1cd4764221c91686dcf4d6b62d7a7b2d112e0b13"
   }
-  use { "ravenxrz/DAPInstall.nvim",
-    commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de"
-  }
+  use { "mxsdev/nvim-dap-vscode-js", requires = {"mfussenegger/nvim-dap"} }
+  -- Removed in favor of Mason
+  --[[ use { "ravenxrz/DAPInstall.nvim", ]]
+  --[[   commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" ]]
+  --[[ } ]]
   --[[ use { "theHamsta/nvim-dap-virtual-text" } ]]
   --[[ use { "nvim-telescope/telescope-dap.nvim" } ]]
 

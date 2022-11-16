@@ -32,6 +32,20 @@ local mappings = {
     ["r"] = { "<cmd>lua require'dap'.repl.open()<cr>", "REPL" },
     ["t"] = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
     ["u"] = { "<cmd>lua require'dapui'.toggle()<cr>", "DapUi Toggle" },
+    --[[ b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" }, ]]
+    --[[X c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" }, ]]
+    --[[ C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" }, ]]
+    --[[ d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" }, ]]
+    --[[ g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" }, ]]
+    --[[X i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" }, ]]
+    --[[X o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" }, ]]
+    --[[ p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" }, ]]
+    --[[ r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" }, ]]
+    --[[X s = { "<cmd>lua require'dap'.continue()<cr>", "Start" }, ]]
+    --[[X t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" }, ]]
+    --[[ q = { "<cmd>lua require'dap'.close()<cr>", "Quit" }, ]]
+    --[[X u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" }, ]]
+    --[[X U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" }, ]]
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["f"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
@@ -129,7 +143,7 @@ local mappings = {
     ["s"] = { ":%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>", "Search Replace" },
     --[[ ["R"] = { "<cmd>lua require('telescope.builtin').registers()<cr>", "Registers" }, ]]
     ["k"] = { "<cmd>lua require('telescope.builtin').keymaps()<cr>", "Keymaps" },
-    ["wg"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", "Live Grep" },
+    ["w"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", "Live Grep" },
     ["C"] = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },
     ["p"] = {
       name = "Picker",

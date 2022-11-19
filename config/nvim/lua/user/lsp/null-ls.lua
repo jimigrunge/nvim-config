@@ -21,7 +21,7 @@ null_ls.setup({
     -- cpp
     formatting.clang_format,
     -- php
-    formatting.phpcbf.with({ extra_args = { "--standard=PSR12", "-"}}),
+    --[[ formatting.phpcbf.with({ extra_args = { "--standard=PSR12", "-"}}), ]]
     --bash
     formatting.shellharden,
     -- java
@@ -41,7 +41,7 @@ null_ls.setup({
     --       due to unrecognized global variable bug
     -- diagnostics.luacheck,
     -- php
-    diagnostics.phpcs.with({extra_args = { "--standard=PSR12", "-"}}),
+    --[[ diagnostics.phpcs.with({extra_args = { "--standard=PSR12", "-"}}), ]]
     -- cpp
     diagnostics.cpplint,
     -- css

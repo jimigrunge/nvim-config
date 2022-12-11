@@ -218,11 +218,11 @@ local v_mappings = {
 }
 
 local i_mappings = {
-  ["a"] = { "<cmd>IconPickerInsert alt_font<cr>", "Alt Font Picker" },
-  ["e"] = { "<cmd>IconPickerInsert emoji<cr>", "Emoji Picker" },
-  ["E"] = { "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", "Everything Picker" },
-  ["i"] = { "<cmd>IconPickerInsert nerd_font<cr>", "Icon Picker" },
-  ["s"] = { "<cmd>IconPickerInsert symbols<cr>", "Symbol Picker" },
+  --[[ ["a"] = { "<cmd>IconPickerInsert alt_font<cr>", "Alt Font Picker" }, ]]
+  --[[ ["e"] = { "<cmd>IconPickerInsert emoji<cr>", "Emoji Picker" }, ]]
+  --[[ ["E"] = { "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", "Everything Picker" }, ]]
+  --[[ ["i"] = { "<cmd>IconPickerInsert nerd_font<cr>", "Icon Picker" }, ]]
+  --[[ ["s"] = { "<cmd>IconPickerInsert symbols<cr>", "Symbol Picker" }, ]]
 }
 
 local setup = {

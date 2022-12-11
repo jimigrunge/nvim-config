@@ -60,6 +60,10 @@ keymap("n", "<space><space>", "<cmd>nohlsearch<CR>", opts)
 -- Create fold
 keymap("n", "zf", "zf%", opts)
 
+-- Center next search result
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
+
 -- Custom grepping
 --[[ keymap("n", ",/",  "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", opts) ]]
 --[[ keymap("n", ",,/", "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", opts) ]]
@@ -88,6 +92,12 @@ keymap("n", "<C-Bslash>", "<cmd>ToggleTerm<cr>", opts)
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "jj", "<ESC>", opts)
 keymap("i", "<C-c><C-p>", "<cmd>PickColorInsert<cr>", opts)
+
+keymap("i", "<C-c><C-a>", "<cmd>IconPickerInsert alt_font<cr>", opts)
+keymap("i", "<C-c><C-e>", "<cmd>IconPickerInsert emoji<cr>", opts)
+keymap("i", "<C-c><C-E>", "<cmd>PickEverything alt_font nerd_font symbols emoji<cr>", opts)
+keymap("i", "<C-c><C-f>", "<cmd>IconPickerInsert nerd_font<cr>", opts)
+keymap("i", "<C-c><C-s>", "<cmd>IconPickerInsert symbols<cr>", opts)
 
 -- -----------------------------------
 -- Visual --

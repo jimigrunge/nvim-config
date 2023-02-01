@@ -4,7 +4,7 @@
 
 ### requirements
 
-* `Neovim 0.8.1 release` version
+* `Neovim 0.7 release` version
 * Ubuntu or Macos Operating system
   * Other operating systems will need manual install
 * A version of bat that is compatible with OS
@@ -15,15 +15,13 @@
 ### Install
 
 #### Home
-Run the `nvim-install.sh` script in the root directory of this repository.
+Run the `nvim-install.sh` script in the bin directory.
 This will install all dependencies, backup your existing configuration, and copy this configuration into place.
 
 #### Work
 
 The work dev VM uses automated puppet scripts to handle installs so we need to handle extra software manually.
-Copy `nivm` to `~/.config` directory.
-
-```cp nvim ~/.congig/nvim```
+Copy `nivm` to `~/.config` directory. `cp nvim ~/.congig/nvim`
 
 #### Then
 

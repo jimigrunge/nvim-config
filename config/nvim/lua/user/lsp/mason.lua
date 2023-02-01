@@ -63,12 +63,12 @@ require("mason-lspconfig").setup({
 -- null-ls format/lint installation configuration
 local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
 if not mason_null_ls_status then
-	return
+  return
 end
 
 mason_null_ls.setup({
-	ensure_installed = linter_formatters,
-	automatic_installation = true,
+  ensure_installed = linter_formatters,
+  automatic_installation = true,
 })
 
 -- -----------------------------------

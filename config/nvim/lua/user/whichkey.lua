@@ -4,21 +4,21 @@ if not status_ok then
 end
 
 local mappings = {
-  [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
-  ["/"] = { "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", "Comment" },
+  [";"] = { "<cmd>Alpha<cr>", "Dashboard" },
+  ["/"] = { "<cmd>lua require('Comment.api').toggle.linewise.current()<cr>", "Comment" },
   ["?"] = { "<cmd>Cheatsheet<cr>", "Cheatsheet" },
-  [">"] = { "<cmd>BufferLineMoveNext<CR>", "BufferMoveNext" },
-  ["<lt>"] = { "<cmd>BufferLineMovePrev<CR>", "BufferMovePrevious" },
+  [">"] = { "<cmd>BufferLineMoveNext<cr>", "BufferMoveNext" },
+  ["<lt>"] = { "<cmd>BufferLineMovePrev<cr>", "BufferMovePrevious" },
   ["a"] = { "<cmd>Alpha<cr>", "[A]lpha" },
   ["b"] = {
     name = "[B]uffers",
     ["b"] = { "<cmd>Telescope buffers theme=ivy<cr>", "[B]uffers" },
-    ["c"] = { "<cmd>Bdelete!<CR>", "[C]lose Buffer" },
+    ["c"] = { "<cmd>Bdelete!<cr>", "[C]lose Buffer" },
     ["p"] = {"<cmd>BufferLinePick<cr>", "[P]ick"},
-    ["j"] = { "<cmd>BufferLineMoveNext<CR>", "BufferMoveNext" },
-    ["k"] = { "<cmd>BufferLineMovePrev<CR>", "BufferMovePrevious" },
+    ["j"] = { "<cmd>BufferLineMoveNext<cr>", "BufferMoveNext" },
+    ["k"] = { "<cmd>BufferLineMovePrev<cr>", "BufferMovePrevious" },
   },
-  ["c"] = { "<cmd>Bdelete!<CR>", "[C]lose Buffer" },
+  ["c"] = { "<cmd>Bdelete!<cr>", "[C]lose Buffer" },
   ["d"] = {
     name = "[D]ebug",
     ["b"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle [B]reakpoint" },
@@ -51,12 +51,10 @@ local mappings = {
   ["f"] = { "<cmd>Telescope live_grep<cr>", "[F]ind Text" },
   ["g"] = {
     name = "[G]it",
-    ["a"] = { "<cmd>Git blame<CR>", "Bl[a]me" },
+    ["a"] = { "<cmd>Git blame<cr>", "Bl[a]me" },
     ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
     ["c"] = { "<cmd>Telescope git_commits<cr>", "Checkout [c]ommit" },
     ["C"] = { "<cmd>Telescope git_bcommits<cr>", "Checkout commit(for [c]urrent file)" },
-    -- TODO: Why is this broken: open a issue with dev
-    -- ["d"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
     ["d"] = {
       name = "[D]iffView",
       ["c"] = { "<cmd>DiffviewClose<cr>", "Diff View [C]lose" },
@@ -65,10 +63,10 @@ local mappings = {
       ["o"] = { "<cmd>DiffviewOpen<cr>", "Diff View [O]pen" },
     },
     ["e"] = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Toggle Blam[e]" },
-    ["g"] = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazy[G]it" },
+    ["g"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazy[G]it" },
     ["j"] = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     ["k"] = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-    ["l"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<CR>", "B[l]ame" },
+    ["l"] = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "B[l]ame" },
     ["o"] = { "<cmd>Telescope git_status<cr>", "[O]pen changed file" },
     ["p"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "[P]review Hunk" },
     -- This works I just don't want it on for the moment
@@ -78,9 +76,9 @@ local mappings = {
     ["t"] = { "<cmd>Git status<cr>", "S[t]atus"},
     ["u"] = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "[U]ndo Stage Hunk"},
   },
-  ["h"] = { "<cmd>nohlsearch<CR>", "[H]ighlight Off" },
+  ["h"] = { "<cmd>nohlsearch<cr>", "[H]ighlight Off" },
   -- ["i"] = {},
-  -- ["j"j = {},
+  ["j"] = { "<cmd>lua require('trevj').format_at_cursor()<cr>", "Format Structures" },
   -- ["k"] = {},
   ["l"] = {
     name = "[L]SP",
@@ -88,24 +86,24 @@ local mappings = {
     ["c"] = { "<cmd>lua require('neogen').generate()<cr>", "[C]reate DocBlock"},
     ["d"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "[D]ocument Diagnostics" },
     ["D"] = { "<cmd>lua require('neogen').generate()<cr>", "[D]ocBloc Annotations" },
-    ["e"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line diagnostic [e]rror hover" },
-    ["E"] = { "<cmd>lua require('lsp_lines').toggle()<CR>", "Line diagnostic [E]rror" },
+    ["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Line diagnostic [e]rror hover" },
+    ["E"] = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Line diagnostic [E]rror" },
     ["f"] = { "<cmd>lua vim.lsp.buf.format()<cr>", "[F]ormat" },
     ["i"] = { "<cmd>LspInfo<cr>", "[I]nfo" },
     ["I"] = { "<cmd>Mason<cr>", "Mason [I]nstaller" },
-    ["j"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next Diagnostic" },
+    ["j"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
     ["k"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
     ["l"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "Code [L]ens Action" },
     ["M"] = { "<cmd>Mason<cr>", "[M]ason Installer" },
-    ["m"] = { "lua require'nvim-treesitter.textobjects.swap'.swap_previous('@parameter.inner')<CR>", "Swap next param" },
-    ["n"] = { "lua require'nvim-treesitter.textobjects.swap'.swap_next('@parameter.inner')<CR>", "Swap prev param" },
+    ["m"] = { "lua require'nvim-treesitter.textobjects.swap'.swap_previous('@parameter.inner')<cr>", "Swap next param" },
+    ["n"] = { "lua require'nvim-treesitter.textobjects.swap'.swap_next('@parameter.inner')<cr>", "Swap prev param" },
     ["o"] = { "<cmd>SymbolsOutline<cr>", "Toggle [O]utline" },
     ["q"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "[Q]uickfix" },
     ["r"] = { "<cmd>lua require('cosmic-ui').rename()<cr>", "[R]ename" },
     ["s"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document [S]ymbols" },
     ["S"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace [S]ymbols" },
-    ["t"] = { "lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@function.outer')<CR>", "Peek DefCode Func" },
-    ["T"] = { "lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@class.outer')<CR>", "Peek DefCode Class" },
+    ["t"] = { "lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@function.outer')<cr>", "Peek DefCode Func" },
+    ["T"] = { "lua require'nvim-treesitter.textobjects.lsp_interop'.peek_definition_code('@class.outer')<cr>", "Peek DefCode Class" },
     ["w"] = { "<cmd>Telescope diagnostics<cr>", "[W]orkspace Diagnostics" },
   },
   ["m"] = {
@@ -115,9 +113,9 @@ local mappings = {
   --[[ ["n"] = {}, ]]
   ["o"] = {
     name = "[O]utline",
-    ["t"] = { "<cmd>SymbolsOutline<CR>", "[T]oggle Outline" },
-    ["o"] = { "<cmd>SymbolsOutlineOpen<CR>", "[O]pen Outline" },
-    ["c"] = { "<cmd>SymbolsOutlineClose<CR>", "[C]lose Outline" }
+    ["t"] = { "<cmd>SymbolsOutline<cr>", "[T]oggle Outline" },
+    ["o"] = { "<cmd>SymbolsOutlineOpen<cr>", "[O]pen Outline" },
+    ["c"] = { "<cmd>SymbolsOutlineClose<cr>", "[C]lose Outline" }
   },
   ["P"] = { "<cmd>Telescope projects<cr>", "[P]rojects" },
   ["p"] = {
@@ -128,24 +126,28 @@ local mappings = {
     ["S"] = { "<cmd>PackerStatus<cr>", "[S]tatus" },
     ["u"] = { "<cmd>PackerUpdate<cr>", "[U]pdate" },
   },
-  ["q"] = { "<cmd>q!<CR>", "[Q]uit" },
-  -- ["r"] = {},
-  -- TODO: Some of the telescope builtins are not working properly
+  ["q"] = { "<cmd>q!<cr>", "[Q]uit" },
+  ["r"] = {
+    name = "[R]esume",
+    ["s"] = { "<cmd>lua require('persistence').load()<cr>", "[S]ession For Current Directory" },
+    ["l"] = { "<cmd>lua require('persistence').load({ last = true })<cr>", "[L]ast Session" },
+    ["q"] = { "<cmd>lua require('persistence').stop()<cr>", "[Q]uit Persistence " },
+  },
   ["s"] = {
     name = "[S]earch",
     ["/"] = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
     ["a"] = { "<cmd>lua require('telescope.builtin').resume()<cr>", "Search [A]gain" },
-    --[[ ["b"] = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Checkout branch" }, ]]
+    ["b"] = { "<cmd>Telescope git_branches<cr>", "Checkout [b]ranch" },
     ["c"] = { "<cmd>lua require('telescope.builtin').colorscheme()<cr>", "[C]olorscheme" },
     ["f"] = { "<cmd>lua require('telescope.builtin').fd()<cr>", "[F]D find file" },
-    ["g"] = { "<cmd>lua require 'telescope.builtin'.live_grep()<CR>", "Live [G]rep" },
+    ["g"] = { "<cmd>lua require 'telescope.builtin'.live_grep()<cr>", "Live [G]rep" },
     ["h"] = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Find [H]elp" },
-    --[[ ["M"] = { "<cmd>lua require('telescope.builtin').man_pages()<cr>", "[M]an Pages" }, ]]
+    ["M"] = { "<cmd>lua require('telescope.builtin').man_pages()<cr>", "[M]an Pages" },
     ["r"] = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Open [R]ecent File" },
     ["s"] = { ":%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>", "[S]earch Replace" },
     ["R"] = { "<cmd>lua require('telescope.builtin').registers()<cr>", "Registers" },
     ["k"] = { "<cmd>lua require('telescope.builtin').keymaps()<cr>", "[K]eymaps" },
-    ["w"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<CR>", "Live Grep [W]ord" },
+    ["w"] = { "<cmd>lua require 'telescope.builtin'.grep_string({find_command = { 'rg', vim.fn.expand('<cword>'), '--ignore', '--hidden', '--smart-case' }})<cr>", "Live Grep [W]ord" },
     ["C"] = { "<cmd>lua require('telescope.builtin').commands()<cr>", "[C]ommands" },
     ["p"] = {
       name = "[P]icker",
@@ -162,11 +164,13 @@ local mappings = {
     ["n"] = { "<cmd>lua _NODE_TOGGLE()<cr>", "[N]ode" },
     ["u"] = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCD[U]" },
     ["b"] = { "<cmd>lua _BPYTOP_TOGGLE()<cr>", "[B]PyTop" },
-    ["t"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "H[t]op" },
+    ["h"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "[H]top" },
     ["p"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "[P]ython" },
-    ["f"] = { "<cmd>ToggleTerm direction=float<cr>", "[F]loat" },
-    ["h"] = { "<cmd>ToggleTerm size=80 direction=horizontal<cr>", "[H]orizontal" },
-    ["v"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "[V]ertical" },
+    ["t"] = { "<cmd>ToggleTerm size=30<cr>", "[T]oggle Term" },
+    --[[ ["f"] = { "<cmd>ToggleTerm direction=float<cr>", "[F]loat" }, ]]
+    --[[ ["t"] = { "<cmd>ToggleTerm size=60<cr>", "[T]oggle" }, ]]
+    --[[ ["h"] = { "<cmd>ToggleTerm size=80 direction=horizontal<cr>", "[H]orizontal" }, ]]
+    --[[ ["v"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "[V]ertical" }, ]]
   },
   -- ["u"] = {},
   -- ["v"] = {},
@@ -180,12 +184,12 @@ local mappings = {
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["x"] = {
     name = "Diagnostic[x]",
-    d = { "<cmd>TroubleToggle document_diagnostics<CR>", "[D]ocument" },
-    l = { "<cmd>TroubleToggle loclist<CR>", "[L]oclist" },
-    q = { "<cmd>TroubleToggle quickfix<CR>", "[Q]uickfix" },
-    R = { "<cmd>TroubleToggle lsp_references<CR>", "[R]eferences" },
-    w = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "[W]orkspace" },
-    x = { "<cmd>TroubleToggle<CR>", "Trouble" },
+    d = { "<cmd>TroubleToggle document_diagnostics<cr>", "[D]ocument" },
+    l = { "<cmd>TroubleToggle loclist<cr>", "[L]oclist" },
+    q = { "<cmd>TroubleToggle quickfix<cr>", "[Q]uickfix" },
+    R = { "<cmd>TroubleToggle lsp_references<cr>", "[R]eferences" },
+    w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "[W]orkspace" },
+    x = { "<cmd>TroubleToggle<cr>", "Trouble" },
     t = { name = "[T]odo",
       l = { "<cmd>TodoLocList<cr>", "[L]ocal List" },
       q = { "<cmd>TodoQuickFix<cr>", "[Q]uickFix" },
@@ -200,22 +204,22 @@ local mappings = {
 local n_mappings = {
   ["g"] = {
     name = "LSP",
-    ["b"] = {name="+Comment blockwise"},
-    ["c"] = {name="+Comment linewise"},
-    ["d"] = {"<cmd>Telescope lsp_definitions<CR>", "Definition"},
-    ["D"] = {"<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration"},
-    ["i"] = {"<cmd>Telescope lsp_implementations<CR>", "Implementation"},
-    ["l"] = {"<cmd>lua vim.diagnostic.open_float()<CR>"},
-    ["r"] = {"<cmd>Telescope lsp_references<CR>", "References"},
+    ["b"] = { name="+Comment blockwise" },
+    ["c"] = { name="+Comment linewise" },
+    ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
+    ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
+    ["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
+    ["l"] = { "<cmd>lua vim.diagnostic.open_float()<cr>" },
+    ["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
     ["R"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    ["v"] = {name="Reselect"}
+    ["v"] = { name="Reselect" }
   },
-  ["K"] = {"<cmd>lua vim.lsp.buf.hover()<CR>", "Hover"},
-  ["<C-k>"] = {"<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature"}
+  ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
+  ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" }
 }
 
 local v_mappings = {
-  ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
+  ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", "Comment" },
   ["f"] = { ":s/\\v%V//gc<Left><Left><Left><Left>", "Search Replace Visual" },
 }
 

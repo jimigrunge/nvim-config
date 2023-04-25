@@ -14,7 +14,7 @@ telescope.setup {
     layout_strategy = "horizontal",
     layout_config = {
       width = 0.99,
-      height = 0.99
+      height = 0.89
       -- other layout configuration here
     },
     prompt_prefix = " ",

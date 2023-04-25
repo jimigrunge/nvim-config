@@ -11,7 +11,8 @@ local servers = {
 	"lemminx",      -- XML/XSLT
 	"pyright",      -- python
 	"solang",       -- solona
-	"sumneko_lua",  -- lua
+	--[[ "sumneko_lua",  -- lua ]]
+	"lua_ls",       -- lua
 	"tsserver",     -- typescript
 	"vimls",        -- vim
 	"yamlls",       -- yaml

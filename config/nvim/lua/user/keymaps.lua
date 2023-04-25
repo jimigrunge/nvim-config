@@ -83,7 +83,7 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 keymap("n", "<C-c><C-p>", "<cmd>PickColor<cr>", opts)
 
-keymap("n", "<C-Bslash>", "<cmd>ToggleTerm<cr>", opts)
+--[[ keymap("n", "<C-Bslash>", "<cmd>ToggleTerm<cr>", opts) ]]
 
 -- -----------------------------------
 -- Insert --

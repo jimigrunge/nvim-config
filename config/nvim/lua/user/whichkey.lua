@@ -209,7 +209,8 @@ local n_mappings = {
     ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Definition" },
     ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
     ["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Implementation" },
-    ["l"] = { "<cmd>lua vim.diagnostic.open_float()<cr>" },
+    ["l"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Open Float"},
+    ["o"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type Definition" },
     ["r"] = { "<cmd>Telescope lsp_references<cr>", "References" },
     ["R"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     ["v"] = { name="Reselect" }

@@ -12,18 +12,20 @@
 # TODO: Move Intelephense key file into place
 # ############################################################
 
+TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 CONST_LINUX="Linux"
 CONST_MAC="Darwin"
 # CONST_CYGWIN="Cygwin"
 # CONST_MINGW="MinGw"
 
-INSTALLER_DIR=$(pwd)/config/nvim
+NVIM_SRC_DIR=$(pwd)/config/nvim
 NVIM_INSTALL_DIR=~/.config/nvim
 LOCAL_BIN_DIR=~/bin
 VIM_LOG_DIR=~/.log/vim
 CONFIG_DIR=~/.config
 DBG_ADAPTER_DIR=~/.local/share/debug-adapters
 GLOBAL_NPM_DIR=~/.npm
+# NVIM_BACKUP=~/.config/nvim
 # BASH_PROFILE=~/.profile
 # ZSH_PROFILE=~/.zshrc
 
@@ -32,9 +34,118 @@ unameOut="$(uname -s)"
 
 echo "Installing NeoVim configuration..."
 echo "OS: $unameOut"
-echo "Installer dir: $INSTALLER_DIR"
+echo "Installer dir: $NVIM_SRC_DIR"
 echo "NeoVim install dir: $NVIM_INSTALL_DIR"
 echo "Local bin dir: $LOCAL_BIN_DIR"
+
+
+install_linux_deps()
+{
+    echo "OS setup begin"
+    echo "Updating apt..."
+    sudo apt-get update
+
+    if ! [ -x "$(command -v git)" ]; then
+        echo 'Error: git is not installed, attempting to install.' >&2
+        sudo apt install git tig -y
+    fi
+    if ! [ -x "$(command -v pip)" ]; then
+        echo 'Error: pip is not installed, attempting to install.' >&2
+        sudo apt install python3-pip -y
+        pip install --upgrade pynvim
+    fi
+    if ! [ -x "$(command -v node)" ]; then
+        echo 'Error: nodejs is not installed, attempting to install.' >&2
+        curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+        sudo apt install curl build-essential -y
+        sudo apt-get install nodejs -y
+    fi
+    if ! [ -x "$(command -v go)" ]; then
+        echo 'Error: go not found, attampting to install.' >&2
+        sudo add-apt-repository ppa:longsleep/golang-backports
+        sudo apt update
+        sudo apt install golang-go
+    fi
+    if ! [ -x "$(command -v rg)" ]; then
+        echo 'Error: ripgrep not found, attampting to install.' >&2
+        sudo apt install ripgrep -y
+    fi
+    if ! [ -x "$(command -v xclip)" ]; then
+        echo 'Error: xclip not found, attampting to install.' >&2
+        sudo apt install xclip -y
+    fi
+    if ! [ -x "$(command -v fzf)" ]; then
+        echo 'Error: fzf not found, attampting to install.' >&2
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
+    fi
+    if ! [ -x "$(command -v php)" ]; then
+        echo 'Error: php not found, attampting to install.' >&2
+        sudo apt install -y php php-cli php-fpm php-json php-common php-mysql php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
+    fi
+    if ! [ -x "$(command -v composer)" ]; then
+        echo 'Error: composer not found, attampting to install.' >&2
+        install_composer
+    fi
+    if ! [ -x "$(command -v cargo)" ]; then
+      # Pre Ubuntu 20.04
+      # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+      # On Ubuntu 20.04+ `sudo apt install rustc`
+      sudo apt install -y rustc
+    fi
+
+    echo "OS setup complete"
+}
+
+install_mac_deps()
+{
+    echo "OS setup begin"
+
+    if ! [ -x "$(command -v brew)" ]; then
+        echo 'Error: MacOS requires homebrew package manager' >&2
+        echo '  Attempting to install homebrew...' >&2
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    if [ -x "$(command -v brew)" ]; then
+      echo 'Updating Homebrew.' >&2
+      brew update
+    fi
+    if ! [ -x "$(command -v git)" ]; then
+        echo 'Error: git is not installed, attempting to install.' >&2
+        brew install git
+    fi
+    if ! [ -x "$(command -v pip)" ]; then
+        echo 'Error: pip is not installed, attempting to install.' >&2
+        brew install python
+        pip install --upgrade pynvim
+        pip3 install --upgrade pynvim
+    fi
+    if ! [ -x "$(command -v node)" ]; then
+        echo 'Error: nodejs is not installed, attempting to install.' >&2
+        brew install node
+    fi
+    if ! [ -x "$(command -v fzf)" ]; then
+        echo 'Error: fzf not found, attampting to install.' >&2
+        brew install fzf
+        "$(brew --prefix)"/opt/fzf/install
+    fi
+    if ! [ -x "$(command -v rust-analyzer)" ]; then
+        echo 'Error: rust not found, attampting to install.' >&2
+        brew install rust
+        brew install rust-analyzer
+    fi
+    if ! [ -x "$(command -v php)" ]; then
+        echo 'Error: php not found, attampting to install.' >&2
+        brew install php
+    fi
+    if ! [ -x "$(command -v composer)" ]; then
+        echo 'Error: composer not found, attampting to install.' >&2
+        install_composer
+    fi
+
+    echo "OS setup complete"
+}
 
 create_dirs()
 {
@@ -104,7 +215,6 @@ install_libraries()
     echo "Insure we have PHP Linting and Formatting"
     echo "* Checking for php code sniffer"
     if ! [ -x "$(command -v phpcs)" ]; then
-        # composer global require squizlabs/php_codesniffer
         wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
         mv phpcs.phar $LOCAL_BIN_DIR./phpcs
 
@@ -112,15 +222,14 @@ install_libraries()
         mv phpcbf.phar $LOCAL_BIN_DIR./phpcbf
     fi
 
-    # TODO: install without composer
     echo "* Checking for php-cs-fixer"
     if ! [ -x "$(command -v php-cs-fixer)" ]; then
-        composer global require friendsofphp/php-cs-fixer
+        wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
+        mv php-cs-fixer $LOCAL_BIN_DIR./php-cs-fixer
     fi
 
     echo "* Checking for php mess detector"
     if ! [ -x "$(command -v phpmd)" ]; then
-        # composer global require phpmd/phpmd
         wget -c https://phpmd.org/static/latest/phpmd.phar
         mv phpmd.phar $LOCAL_BIN_DIR./phpmd
     fi
@@ -130,14 +239,13 @@ install_libraries()
 
 install_nvim_files()
 {
-    echo "Moving NeoVim configurations into place"
+    echo "Backing up current NeoVim configurations to $NVIM_INSTALL_DIR.$TIMESTAMP"
     if [[ -d "$NVIM_INSTALL_DIR" ]]; then
-        rm -rf ~/.config/nvim-orig.backup
-        mv -f "$NVIM_INSTALL_DIR" ~/.config/nvim-orig.backup
+        mv -f "$NVIM_INSTALL_DIR" "$NVIM_INSTALL_DIR.$TIMESTAMP"
     fi
 
     echo "Copying nvim configuration into place"
-    cp -r "$INSTALLER_DIR" "$NVIM_INSTALL_DIR"
+    cp -r "$NVIM_SRC_DIR" "$NVIM_INSTALL_DIR"
 }
 
 install_composer()
@@ -149,110 +257,6 @@ install_composer()
 
     export PATH=~/.composer/vendor/bin:~/.config/composer/vendor/bin:$PATH
     echo "Composer install complete"
-}
-
-install_linux_deps()
-{
-    echo "OS setup begin"
-
-    if ! [ -x "$(command -v git)" ]; then
-        echo 'Error: git is not installed, attempting to install.' >&2
-        sudo apt-get update
-        sudo apt install git tig -y
-    fi
-    if ! [ -x "$(command -v pip)" ]; then
-        echo 'Error: pip is not installed, attempting to install.' >&2
-        sudo apt-get update
-        sudo apt install python3-pip -y
-        pip install --upgrade pynvim
-    fi
-    if ! [ -x "$(command -v node)" ]; then
-        echo 'Error: nodejs is not installed, attempting to install.' >&2
-        curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
-        sudo apt-get update
-        sudo apt install curl build-essential -y
-        sudo apt-get install nodejs -y
-    fi
-    if ! [ -x "$(command -v go)" ]; then
-        echo 'Error: go not found, attampting to install.' >&2
-        sudo add-apt-repository ppa:longsleep/golang-backports
-        sudo apt update
-        sudo apt install golang-go
-    fi
-    if ! [ -x "$(command -v rg)" ]; then
-        echo 'Error: ripgrep not found, attampting to install.' >&2
-        sudo apt install ripgrep -y
-    fi
-    if ! [ -x "$(command -v xclip)" ]; then
-        echo 'Error: xclip not found, attampting to install.' >&2
-        sudo apt install xclip -y
-    fi
-    if ! [ -x "$(command -v fzf)" ]; then
-        echo 'Error: fzf not found, attampting to install.' >&2
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-        ~/.fzf/install
-    fi
-    if ! [ -x "$(command -v php)" ]; then
-        echo 'Error: php not found, attampting to install.' >&2
-        sudo apt install -y php php-cli php-fpm php-json php-common php-mysql php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
-    fi
-    if ! [ -x "$(command -v composer)" ]; then
-        echo 'Error: composer not found, attampting to install.' >&2
-        install_composer
-    fi
-    if ! [ -x "$(command -v cargo)" ]; then
-      # Pre 20.04
-      # curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-      # On Ubuntu 20.04+ `sudo apt install rustc`
-      sudo apt install -y rustc
-    fi
-
-    echo "OS setup complete"
-}
-
-install_mac_deps()
-{
-    echo "OS setup begin"
-
-    if ! [ -x "$(command -v brew)" ]; then
-        echo 'Error: MacOS requires homebrew' >&2
-        exit 1
-    fi
-    if ! [ -x "$(command -v git)" ]; then
-        echo 'Error: git is not installed, attempting to install.' >&2
-        brew update && brew install git
-    fi
-    if ! [ -x "$(command -v pip)" ]; then
-        echo 'Error: pip is not installed, attempting to install.' >&2
-        brew update && brew install python
-        pip install --upgrade pynvim
-        pip3 install --upgrade pynvim
-    fi
-    if ! [ -x "$(command -v node)" ]; then
-        echo 'Error: nodejs is not installed, attempting to install.' >&2
-        brew update && brew install node
-    fi
-    if ! [ -x "$(command -v fzf)" ]; then
-        echo 'Error: fzf not found, attampting to install.' >&2
-        brew install fzf
-        "$(brew --prefix)"/opt/fzf/install
-    fi
-    if ! [ -x "$(command -v rust-analyzer)" ]; then
-        echo 'Error: rust not found, attampting to install.' >&2
-        brew install rust
-        brew install rust-analyzer
-    fi
-    if ! [ -x "$(command -v php)" ]; then
-        echo 'Error: php not found, attampting to install.' >&2
-        brew install php
-    fi
-    if ! [ -x "$(command -v composer)" ]; then
-        echo 'Error: composer not found, attampting to install.' >&2
-        install_composer
-    fi
-
-    echo "OS setup complete"
 }
 
 case "${unameOut}" in

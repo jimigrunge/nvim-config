@@ -94,6 +94,10 @@ install_linux_deps()
       # On Ubuntu 20.04+ `sudo apt install rustc`
       sudo apt install -y rustc
     fi
+    if ! [ -x "$(command -v jq)" ]; then
+        echo 'Error: jq not found, attampting to install.' >&2
+        sudo apt install jq -y
+    fi
 
     echo "OS setup complete"
 }
@@ -142,6 +146,10 @@ install_mac_deps()
     if ! [ -x "$(command -v composer)" ]; then
         echo 'Error: composer not found, attampting to install.' >&2
         install_composer
+    fi
+    if ! [ -x "$(command -v jq)" ]; then
+        echo 'Error: jq not found, attampting to install.' >&2
+        brew install jq
     fi
 
     echo "OS setup complete"
